@@ -30,15 +30,12 @@ fi
 
 
 # Create a new user!
-echo -e " • Entrez le nouvel utilisateur qui sera créé pour ce site (\e[4m$HOSTNAME\e[0m):"
+echo -e " • Entrez le nom du nouvel utilisateur qui sera créé pour ce site (\e[4m$HOSTNAME\e[0m):"
 read USERNAME
 if [ -z $USERNAME ]; then
 	USERNAME=$HOSTNAME
 fi
 adduser $USERNAME
-# permets aux devs de voir les dossiers de cet utilisateur.
-sudo usermod -a -G $USERNAME zeuros 
-sudo usermod -a -G $USERNAME yb 
 HOME_DIR=$(eval echo ~$USERNAME)
 
 
