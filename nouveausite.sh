@@ -100,13 +100,16 @@ sed -i "s/__MIN_SERVERS__/$MIN_SERVERS/g" $FPMCONF
 sed -i "s/__MAX_SERVERS__/$MAX_SERVERS/g" $FPMCONF
 sed -i "s/__MAX_CHILDS__/$((MAX_SERVERS+START_SERVERS))/g" $FPMCONF
 
-a2ensite $HOSTNAME.$DOMAIN.conf
+# permet à www-data d'accéder au dossier du nouvel utilisateur
+usermod -aG $USERNAME $WEB_SERVER_GROUP
 
 # set file perms and create required dirs!
 chmod 600 $CONFIG
 mkdir -p $PUBLIC_HTML_DIR $WEB_ROOTS/$USERNAME/sock
 chmod 750 $WEB_ROOTS/$USERNAME -R
-chown $USERNAME:staff $WEB_ROOTS/$USERNAME -R
+chown $USERNAME:$USERNAME $WEB_ROOTS/$USERNAME -R
+
+a2ensite $HOSTNAME.$DOMAIN.conf
 
 $APACHE_INIT reload
 $PHP_FPM_INIT restart
