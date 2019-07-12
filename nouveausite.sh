@@ -21,7 +21,7 @@ fi
 
 
 # choix du nom du site
-echo -e " • Veuillez entrer un nom de sous-domaine qui donnera une url de type \e[4m[votre sous domaine].$DOMAIN\e[0m:"
+echo -e " • Veuillez entrer un nom de sous-domaine qui donnera une url de type \e[4m[votre sous domaine]\e[0m.$DOMAIN:"
 read HOSTNAME
 HOSTNAME=${HOSTNAME,,}
 if [ -z $HOSTNAME ]; then
