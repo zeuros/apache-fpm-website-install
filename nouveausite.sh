@@ -114,7 +114,7 @@ $PHP_FPM_INIT restart
 
 echo "<?php phpinfo();" > $PUBLIC_HTML_DIR/info.php
 
-SUCCESS=$(wget -q -O - "https://babedou.arkheewebdev.com/info.php" | grep -c "PHP Version $PHP_VERSION")
+SUCCESS=$(wget -q -O - "https://$HOSTNAME.$DOMAIN/info.php" | grep -c "PHP Version $PHP_VERSION")
 if [ "$SUCCESS" -eq "1" ]; then
 	MSG="a été créé pour l'user \e[4m$HOSTNAME\e[0m dans la bonne humeur ;)\n • Son webroot est \e[4m$PUBLIC_HTML_DIR\e[0m !"
 else
