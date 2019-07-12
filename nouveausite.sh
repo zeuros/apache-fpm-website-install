@@ -4,7 +4,6 @@
 
 # Modify the following to match your system
 APACHE_CONFIG='/etc/apache2/sites-available'
-APACHE_SITES_ENABLED='/etc/apache2/sites-enabled'
 WEB_SERVER_GROUP='www-data'
 APACHE_INIT='/etc/init.d/apache2'
 DOMAIN='arkheewebdev.com'
