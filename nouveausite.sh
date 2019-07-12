@@ -100,7 +100,7 @@ sed -i "s/__MIN_SERVERS__/$MIN_SERVERS/g" $FPMCONF
 sed -i "s/__MAX_SERVERS__/$MAX_SERVERS/g" $FPMCONF
 sed -i "s/__MAX_CHILDS__/$((MAX_SERVERS+START_SERVERS))/g" $FPMCONF
 
-# permet à www-data d'accéder au dossier du nouvel utilisateur
+# permet à l'USER www-data d'accéder au dossier du nouvel utilisateur
 usermod -aG $USERNAME $WEB_SERVER_GROUP
 
 # set file perms and create required dirs!
