@@ -28,8 +28,7 @@ if [ -z $HOSTNAME ]; then
     echo "Pas de nom de site, pas de script !"
     exit
 fi
-SOCKET="\/var\/run\/$HOSTNAME_fpm\.sock"
-
+SOCKET="/var/run/${HOSTNAME}_fpm.sock"
 # Create a new user!
 echo -e " • Entrez le nom du nouvel utilisateur qui sera créé pour ce site (\e[4m$HOSTNAME\e[0m):"
 read USERNAME
