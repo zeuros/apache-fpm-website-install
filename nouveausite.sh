@@ -11,7 +11,8 @@ DOMAIN='arkheewebdev.com'
 WEB_ROOTS='/var/www'
 
 SERVER_IP=$(hostname -I | awk '{print $1}')
-CURRENT_DIR=$(pwd)
+SCRIPT=$(realpath $0)
+CURRENT_DIR=$(dirname $SCRIPT)
 
 # vérifie qu'on est root
 if [[ $(/usr/bin/id -u) -ne 0 ]]; then
