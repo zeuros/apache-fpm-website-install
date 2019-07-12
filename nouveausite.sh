@@ -102,7 +102,7 @@ sed -i "s/__MAX_CHILDS__/$((MAX_SERVERS+START_SERVERS))/g" $FPMCONF
 usermod -aG $USERNAME $WEB_SERVER_GROUP
 chmod 600 $CONFIG
 
-sudo a2ensite $HOSTNAME.$DOMAIN.conf
+a2ensite $HOSTNAME.$DOMAIN.conf
 
 # set file perms and create required dirs!
 mkdir -p $PUBLIC_HTML_DIR $WEB_ROOTS/$USERNAME/sock
