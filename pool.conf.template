@@ -2,7 +2,7 @@
 
 user = __HOSTNAME__
 group = __HOSTNAME__
-listen = __socket__
+listen = __SOCKET__
 listen.owner = www-data
 listen.group = www-data
 ;php_admin_value[open_basedir] = /var/www/__HOSTNAME__/httpdocs:/tmp

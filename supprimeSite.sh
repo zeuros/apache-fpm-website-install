@@ -48,8 +48,8 @@ rm -f /etc/php/**/fpm/pool.d/$HOSTNAME.pool.conf
 userdel $HOSTNAME
 rm -rf /home/$HOSTNAME
 
-# remove webroot
-rm -r $WEB_ROOTS/$HOSTNAME
+# remove webroot but ask before
+rm -ri $WEB_ROOTS/$HOSTNAME
 
 # remove logs
 rm -f /var/log/apache2/access.$HOSTNAME.$DOMAIN.log
