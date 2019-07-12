@@ -9,7 +9,7 @@
         Require all granted
 
         <FilesMatch \.php$>
-                SetHandler "proxy:unix:__WEB_ROOTS__/__HOSTNAME__/sock/__HOSTNAME__.fpm.sock|fcgi://localhost"
+                SetHandler "proxy:unix:__SOCKET__|fcgi://localhost"
         </FilesMatch>
 
     </Directory>

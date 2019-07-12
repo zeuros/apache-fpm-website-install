@@ -28,7 +28,7 @@ if [ -z $HOSTNAME ]; then
     echo "Pas de nom de site, pas de script !"
     exit
 fi
-
+SOCKET="\/var\/run\/$HOSTNAME_fpm\.sock"
 
 # Create a new user!
 echo -e " • Entrez le nom du nouvel utilisateur qui sera créé pour ce site (\e[4m$HOSTNAME\e[0m):"
@@ -68,6 +68,7 @@ sed -i "s/__SERVER_IP__/$SERVER_IP/g" $CONFIG
 sed -i "s/__DOMAIN__/$DOMAIN/g" $CONFIG
 sed -i "s/__HOSTNAME__/$HOSTNAME/g" $CONFIG
 sed -i "s/__PUBLIC_HTML_DIR__/${PUBLIC_HTML_DIR//\//\\/}/g" $CONFIG
+sed -i "s/__SOCKET__/${SOCKET//\//\\/}/g" $CONFIG
 sed -i "s/__WEB_ROOTS__/${WEB_ROOTS//\//\\/}/g" $CONFIG
 
 echo -e " • Combien de serveurs FPM souhaitez vous (\e[4m4\e[0m):"
@@ -94,6 +95,7 @@ cp $CURRENT_DIR/pool.conf.template $FPMCONF
 
 sed -i "s/__HOSTNAME__/$HOSTNAME/g" $FPMCONF
 sed -i "s/__DOMAIN__/$DOMAIN/g" $FPMCONF
+sed -i "s/__SOCKET__/${SOCKET//\//\\/}/g" $FPMCONF
 sed -i "s/__HOME_DIR__/${HOME_DIR//\//\\/}/g" $FPMCONF
 sed -i "s/__START_SERVERS__/$FPM_SERVERS/g" $FPMCONF
 sed -i "s/__MIN_SERVERS__/$MIN_SERVERS/g" $FPMCONF
