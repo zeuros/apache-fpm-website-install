@@ -1,0 +1,18 @@
+[__HOSTNAME__]
+
+user = __HOSTNAME__
+group = __HOSTNAME__
+listen = /var/www/__HOSTNAME__/sock/__HOSTNAME__.fpm.sock
+listen.owner = www-data
+listen.group = www-data
+;php_admin_value[open_basedir] = /var/www/__HOSTNAME__/httpdocs:/tmp
+
+; mandatory values
+pm = dynamic
+pm.max_children = __MAX_CHILDS__
+pm.start_servers = __START_SERVERS__
+pm.min_spare_servers = __MIN_SERVERS__
+pm.max_spare_servers = __MAX_SERVERS__
+php_admin_value[error_log] = /var/log/fpm-php.errors.__HOSTNAME__.__DOMAIN__.log
+php_admin_flag[log_errors] = on
+

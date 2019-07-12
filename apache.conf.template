@@ -1,0 +1,24 @@
+<VirtualHost __SERVER_IP__:443>
+    DocumentRoot "__PUBLIC_HTML_DIR__"
+    ServerName __HOSTNAME__.__DOMAIN__
+
+    <Directory "__PUBLIC_HTML_DIR__">
+
+        Allow from all
+        AllowOverride All Options=ExecCGI,Includes,IncludesNOEXEC,Indexes,MultiViews,SymLinksIfOwnerMatch
+        Require all granted
+
+        <FilesMatch \.php$>
+                SetHandler "proxy:unix:__WEB_ROOTS__/__HOSTNAME__/sock/__HOSTNAME__.fpm.sock|fcgi://localhost"
+        </FilesMatch>
+
+    </Directory>
+
+    CustomLog /var/log/apache2/access.__HOSTNAME__.__DOMAIN__.log combined
+    ErrorLog /var/log/apache2/error.__HOSTNAME__.__DOMAIN__.log
+
+    SSLEngine On
+    SSLCertificateFile /etc/letsencrypt/live/__DOMAIN__/cert.pem
+    SSLCertificateKeyFile /etc/letsencrypt/live/__DOMAIN__/privkey.pem
+    SSLCertificateChainFile /etc/letsencrypt/live/__DOMAIN__/chain.pem
+</VirtualHost>
