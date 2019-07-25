@@ -13,7 +13,6 @@ if [[ $(/usr/bin/id -u) -ne 0 ]]; then
 fi
 
 
-
 ENABLED_URLS=$( grep -h /etc/apache2/sites-enabled/* -e 'ServerName ' | sed -E "s/ServerName (\w+).$DOMAIN*/\1/" | sort -u)
 ASSEMBLED_ENABLED_URLS=$(printf ",\e[4m%s\e[0m" ${ENABLED_URLS[@]})
 ASSEMBLED_ENABLED_URLS=${ASSEMBLED_ENABLED_URLS:1}
@@ -44,13 +43,18 @@ rm -f /var/lib/apache2/site/enabled_by_admin/$HOSTNAME.$DOMAIN
 # remove phpfpm conf
 rm -f /etc/php/**/fpm/pool.d/$HOSTNAME.pool.conf
 
-# remove user
-userdel $HOSTNAME
-groupdel $HOSTNAME
-rm -rf /var/www/$HOSTNAME
+# remove user & group
+sudo userdel $HOSTNAME 
+sudo groupdel $HOSTNAME 
 
-# remove webroot but ask before
-rm -ri $WEB_ROOTS/$HOSTNAME
+# remove user things but not the httpdocs folder
+find $WEB_ROOTS/$HOSTNAME -maxdepth 1  ! -name 'httpdocs' ! -path $WEB_ROOTS/$HOSTNAME -exec rm -rf {} +
+
+echo -e " • Voulez-vous supprimer le contenu du site (\e[4m$WEB_ROOTS/$HOSTNAME/httpdocs\e[0m) [o/N] ?"
+read DEL
+if [ "$DEL" = "o" ]; then
+	rm -rf $WEB_ROOTS/$HOSTNAME
+fi
 
 # remove logs
 rm -f /var/log/apache2/access.$HOSTNAME.$DOMAIN.log
