@@ -35,9 +35,17 @@ read USERNAME
 if [ -z $USERNAME ]; then
 	USERNAME=$HOSTNAME
 fi
-adduser $USERNAME
-HOME_DIR=$(eval echo ~$USERNAME)
+# /!\ Le home dir n'est pas dans /home !
+HOME_DIR="/var/www/${HOSTNAME}"
 
+adduser --home $HOME_DIR --disabled-password $USERNAME
+chown -R $USERNAME:$USERNAME $HOME_DIR
+
+# conf ssh
+mkdir -p $HOME_DIR/.ssh
+chmod 700 $HOME_DIR/.ssh
+cat authorized_keys > $HOME_DIR/.ssh/authorized_keys
+chmod 644 $HOME_DIR/.ssh/authorized_keys
 
 # Choose webroot
 DEFAULT_PUBLIC_HTML_DIR="$WEB_ROOTS/$HOSTNAME/httpdocs"
@@ -95,7 +103,6 @@ cp $CURRENT_DIR/pool.conf.template $FPMCONF
 sed -i "s/__HOSTNAME__/$HOSTNAME/g" $FPMCONF
 sed -i "s/__DOMAIN__/$DOMAIN/g" $FPMCONF
 sed -i "s/__SOCKET__/${SOCKET//\//\\/}/g" $FPMCONF
-sed -i "s/__HOME_DIR__/${HOME_DIR//\//\\/}/g" $FPMCONF
 sed -i "s/__START_SERVERS__/$FPM_SERVERS/g" $FPMCONF
 sed -i "s/__MIN_SERVERS__/$MIN_SERVERS/g" $FPMCONF
 sed -i "s/__MAX_SERVERS__/$MAX_SERVERS/g" $FPMCONF
@@ -106,9 +113,9 @@ usermod -aG $USERNAME $WEB_SERVER_GROUP
 
 # set file perms and create required dirs!
 chmod 600 $CONFIG
-mkdir -p $PUBLIC_HTML_DIR $WEB_ROOTS/$USERNAME/sock
-chmod 750 $WEB_ROOTS/$USERNAME -R
-chown $USERNAME:$USERNAME $WEB_ROOTS/$USERNAME -R
+mkdir -p $PUBLIC_HTML_DIR $WEB_ROOTS/$HOSTNAME/sock
+chmod 750 $WEB_ROOTS/$HOSTNAME -R
+chown $USERNAME:$USERNAME $WEB_ROOTS/$HOSTNAME -R
 
 a2ensite $HOSTNAME.$DOMAIN.conf
 

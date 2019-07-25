@@ -47,7 +47,7 @@ rm -f /etc/php/**/fpm/pool.d/$HOSTNAME.pool.conf
 # remove user
 userdel $HOSTNAME
 groupdel $HOSTNAME
-rm -rf /home/$HOSTNAME
+rm -rf /var/www/$HOSTNAME
 
 # remove webroot but ask before
 rm -ri $WEB_ROOTS/$HOSTNAME
