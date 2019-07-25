@@ -1,0 +1,3 @@
+[ssh-rsa your keys here !]
++
+rename authorized_keys.default => authorized_keys
