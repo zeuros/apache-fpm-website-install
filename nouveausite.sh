@@ -37,7 +37,7 @@ fi
 # /!\ Le home dir n'est pas dans /home !
 HOME_DIR="/var/www/${HOSTNAME}"
 
-adduser --home $HOME_DIR --disabled-password $USERNAME
+adduser --home $HOME_DIR --gecos "" --disabled-password $USERNAME
 chown -R $USERNAME:$USERNAME $HOME_DIR
 
 # conf ssh
