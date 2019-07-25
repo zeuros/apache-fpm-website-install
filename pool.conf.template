@@ -3,8 +3,8 @@
 user = __HOSTNAME__
 group = __HOSTNAME__
 listen = __SOCKET__
-listen.owner = www-data
-listen.group = www-data
+listen.owner = __HOSTNAME__
+listen.group = __HOSTNAME__
 ;php_admin_value[open_basedir] = /var/www/__HOSTNAME__/httpdocs:/tmp
 
 ; mandatory values
