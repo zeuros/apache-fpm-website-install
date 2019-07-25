@@ -15,10 +15,9 @@ CURRENT_DIR=$(dirname $SCRIPT)
 
 # vérifie qu'on est root
 if [[ $(/usr/bin/id -u) -ne 0 ]]; then
-    echo "Not running as root"
-    exit
+    sudo /bin/bash $0 "$@"
+    exit $?
 fi
-
 
 # choix du nom du site
 echo -e " • Veuillez entrer un nom de sous-domaine qui donnera une url de type \e[4m[votre sous domaine]\e[0m.$DOMAIN:"

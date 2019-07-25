@@ -8,8 +8,8 @@ WEB_ROOTS='/var/www'
 
 # vérifie qu'on est root
 if [[ $(/usr/bin/id -u) -ne 0 ]]; then
-    echo "Not running as root"
-    exit
+    sudo /bin/bash $0 "$@"
+    exit $?
 fi
 
 
