@@ -107,12 +107,12 @@ sed -i "s/__MIN_SERVERS__/$MIN_SERVERS/g" $FPMCONF
 sed -i "s/__MAX_SERVERS__/$MAX_SERVERS/g" $FPMCONF
 sed -i "s/__MAX_CHILDS__/$((MAX_SERVERS+START_SERVERS))/g" $FPMCONF
 
-# permet à l'USER www-data d'accéder au dossier du nouvel utilisateur
+# Autorise user www-data à accéder (lecture) aux fichiers du groupe de l'user ($USERNAME = groupe)
 usermod -aG $USERNAME $WEB_SERVER_GROUP
 
 # set file perms and create required dirs!
 chmod 600 $CONFIG
-mkdir -p $PUBLIC_HTML_DIR $WEB_ROOTS/$HOSTNAME/sock
+mkdir -p $PUBLIC_HTML_DIR $WEB_ROOTS/$HOSTNAME/{sock,log}
 chmod 750 $WEB_ROOTS/$HOSTNAME -R
 chown $USERNAME:$USERNAME $WEB_ROOTS/$HOSTNAME -R
 
