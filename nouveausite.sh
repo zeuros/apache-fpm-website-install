@@ -38,6 +38,7 @@ fi
 HOME_DIR="/var/www/${HOSTNAME}"
 
 adduser --home $HOME_DIR --gecos "" --disabled-password $USERNAME
+echo "alias ll='ls -lah --color=auto'" > $HOME_DIR/.bashrc
 chown -R $USERNAME:$USERNAME $HOME_DIR
 
 # conf ssh
