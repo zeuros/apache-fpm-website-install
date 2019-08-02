@@ -27,7 +27,6 @@ if [ -z $HOSTNAME ]; then
     echo "Pas de nom de site, pas de script !"
     exit
 fi
-SOCKET="/var/run/${HOSTNAME}_fpm.sock"
 # Create a new user!
 echo -e " • Entrez le nom du nouvel utilisateur qui sera créé pour ce site (\e[4m$HOSTNAME\e[0m):"
 read USERNAME
@@ -36,6 +35,7 @@ if [ -z $USERNAME ]; then
 fi
 # /!\ Le home dir n'est pas dans /home !
 HOME_DIR="/var/www/${HOSTNAME}"
+SOCKET="$HOME_DIR/sock/${$HOSTNAME}_fpm.sock"
 
 adduser --home $HOME_DIR --gecos "" --disabled-password $USERNAME
 echo "alias ll='ls -lah --color=auto'" > $HOME_DIR/.bashrc
