@@ -130,7 +130,7 @@ SUCCESS=$(wget -q -O - "https://$HOSTNAME.$DOMAIN/info.php" | grep -c "PHP Versi
 if [ "$SUCCESS" -eq "1" ]; then
 	MSG="a été créé pour l'user \e[4m$HOSTNAME\e[0m dans la bonne humeur ;)\n • Son webroot est \e[4m$PUBLIC_HTML_DIR\e[0m !"
 else
-	MSG="n'est pas accessible hélas :/"
+	MSG="n'est pas accessible hélas ¯\_(ツ)_/¯"
 fi
 
 echo -e "\n • Le site \e[4mhttps://$HOSTNAME.$DOMAIN\e[0m $MSG\n"
