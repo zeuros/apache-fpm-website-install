@@ -122,7 +122,9 @@ a2ensite $HOSTNAME.$DOMAIN.conf
 $APACHE_INIT reload
 $PHP_FPM_INIT restart
 
+echo "Site "$HOSTNAME" en place" > $PUBLIC_HTML_DIR/index.php
 echo "<?php phpinfo();" > $PUBLIC_HTML_DIR/info.php
+chown $USERNAME:$USERNAME $PUBLIC_HTML_DIR/{index.php,info.php} -R
 
 SUCCESS=$(wget -q -O - "https://$HOSTNAME.$DOMAIN/info.php" | grep -c "PHP Version $PHP_VERSION")
 if [ "$SUCCESS" -eq "1" ]; then
