@@ -35,7 +35,7 @@ if [ -z $USERNAME ]; then
 fi
 # /!\ Le home dir n'est pas dans /home !
 HOME_DIR="/var/www/${HOSTNAME}"
-SOCKET="$HOME_DIR/sock/${$HOSTNAME}_fpm.sock"
+SOCKET="$HOME_DIR/sock/${HOSTNAME}_fpm.sock"
 
 adduser --home $HOME_DIR --gecos "" --disabled-password $USERNAME
 echo "alias ll='ls -lah --color=auto'" > $HOME_DIR/.bashrc
