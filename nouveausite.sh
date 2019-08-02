@@ -41,12 +41,6 @@ adduser --home $HOME_DIR --gecos "" --disabled-password $USERNAME
 echo "alias ll='ls -lah --color=auto'" > $HOME_DIR/.bashrc
 chown -R $USERNAME:$USERNAME $HOME_DIR
 
-# conf ssh
-mkdir -p $HOME_DIR/.ssh
-chmod 700 $HOME_DIR/.ssh
-cat authorized_keys > $HOME_DIR/.ssh/authorized_keys
-chmod 644 $HOME_DIR/.ssh/authorized_keys
-
 # Choose webroot
 DEFAULT_PUBLIC_HTML_DIR="$WEB_ROOTS/$HOSTNAME/httpdocs"
 echo -e " • Entrez le webroot (\e[4m$DEFAULT_PUBLIC_HTML_DIR\e[0m):"
@@ -116,6 +110,12 @@ chmod 600 $CONFIG
 mkdir -p $PUBLIC_HTML_DIR $WEB_ROOTS/$HOSTNAME/{sock,log}
 chmod 750 $WEB_ROOTS/$HOSTNAME -R
 chown $USERNAME:$USERNAME $WEB_ROOTS/$HOSTNAME -R
+
+# conf ssh
+mkdir -p $HOME_DIR/.ssh
+chmod 700 $HOME_DIR/.ssh
+cat authorized_keys > $HOME_DIR/.ssh/authorized_keys
+chmod 644 $HOME_DIR/.ssh/authorized_keys
 
 a2ensite $HOSTNAME.$DOMAIN.conf
 
