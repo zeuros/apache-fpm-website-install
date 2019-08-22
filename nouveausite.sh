@@ -34,7 +34,7 @@ if [ -z $USERNAME ]; then
 	USERNAME=$HOSTNAME
 fi
 # /!\ Le home dir n'est pas dans /home !
-HOME_DIR="/var/www/${HOSTNAME}"
+HOME_DIR="${WEB_ROOTS}/${HOSTNAME}"
 SOCKET="$HOME_DIR/sock/${HOSTNAME}_fpm.sock"
 
 adduser --home $HOME_DIR --gecos "" --disabled-password $USERNAME
