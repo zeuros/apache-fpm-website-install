@@ -94,6 +94,8 @@ FPMCONF="$PHP_INI_DIR/$HOSTNAME.pool.conf"
 
 cp $CURRENT_DIR/pool.conf.template $FPMCONF
 
+sed -i "s/__WEB_ROOTS__/${WEB_ROOTS//\//\\/}/g" $FPMCONF
+sed -i "s/__HOSTNAME__/$HOSTNAME/g" $FPMCONF
 sed -i "s/__HOSTNAME__/$HOSTNAME/g" $FPMCONF
 sed -i "s/__DOMAIN__/$DOMAIN/g" $FPMCONF
 sed -i "s/__SOCKET__/${SOCKET//\//\\/}/g" $FPMCONF

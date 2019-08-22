@@ -5,7 +5,7 @@ group = __HOSTNAME__
 listen = __SOCKET__
 listen.owner = __HOSTNAME__
 listen.group = __HOSTNAME__
-;php_admin_value[open_basedir] = /var/www/__HOSTNAME__/httpdocs:/tmp
+;php_admin_value[open_basedir] = __WEB_ROOTS__/__HOSTNAME__/httpdocs:/tmp
 
 ; mandatory values
 pm = dynamic
@@ -13,6 +13,6 @@ pm.max_children = __MAX_CHILDS__
 pm.start_servers = __START_SERVERS__
 pm.min_spare_servers = __MIN_SERVERS__
 pm.max_spare_servers = __MAX_SERVERS__
-php_admin_value[error_log] = /var/www/__HOSTNAME__/log/errors.log
+php_admin_value[error_log] = __WEB_ROOTS__/__HOSTNAME__/log/errors.log
 php_admin_flag[log_errors] = on
-access.log = /var/www/__HOSTNAME__/log/access.log
+access.log = __WEB_ROOTS__/__HOSTNAME__/log/access.log
