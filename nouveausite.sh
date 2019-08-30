@@ -119,6 +119,14 @@ chmod 700 $HOME_DIR/.ssh
 cat $CURRENT_DIR/authorized_keys > $HOME_DIR/.ssh/authorized_keys
 chmod 644 $HOME_DIR/.ssh/authorized_keys
 
+# create log folder, symlink logs to project dir
+mkdir -p /var/log/$HOSTNAME
+touch /var/log/$HOSTNAME/{error,access}.log
+ln -s /var/log/$HOSTNAME/error.log $WEB_ROOTS/$HOSTNAME/log/error.log
+ln -s /var/log/$HOSTNAME/access.log $WEB_ROOTS/$HOSTNAME/log/access.log
+chown -R $USERNAME:$USERNAME /var/log/$HOSTNAME $WEB_ROOTS/$HOSTNAME/log
+chmod -R ug+rw /var/log/$HOSTNAME
+
 a2ensite $HOSTNAME.$DOMAIN.conf
 
 $APACHE_INIT reload
