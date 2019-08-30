@@ -116,7 +116,7 @@ chown $USERNAME:$USERNAME $WEB_ROOTS/$HOSTNAME -R
 # conf ssh
 mkdir -p $HOME_DIR/.ssh
 chmod 700 $HOME_DIR/.ssh
-cat authorized_keys > $HOME_DIR/.ssh/authorized_keys
+cat $CURRENT_DIR/authorized_keys > $HOME_DIR/.ssh/authorized_keys
 chmod 644 $HOME_DIR/.ssh/authorized_keys
 
 a2ensite $HOSTNAME.$DOMAIN.conf
